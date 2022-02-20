@@ -269,5 +269,27 @@ async def main_menu_handler(query: types.CallbackQuery):
     )
 
 
+@dp.callback_query_handler(
+    text=["my_list"]
+)
+async def my_list_handler(query: types.CallbackQuery):
+    """
+    Handle 🗂 My List button
+    """
+    user_id = query.message.chat.id
+    user_auth_data = get_authentication_data(user_id)
+    auth_access_token = user_auth_data["auth_access_token"]
+    user_list_data = get_list(auth_access_token)
+    if user_list_data["status"]:
+        items = user_list_data["list"]
+        total_items = len(items)
+    else:
+        await query.message.edit_text(
+            emojize(
+                "Something went wrong :man_facepalming_light_skin_tone:. Please, try again. "
+                "if the problem persists, contact the developer."
+            )
+        )
+
 if __name__ == "__main__":
     executor.start_polling(dp, skip_updates=True)
