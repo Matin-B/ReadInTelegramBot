@@ -4,8 +4,10 @@ from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.emoji import emojize
 from pymongo import MongoClient
-from pocket import request_auth_code, generate_auth_url, request_auth_access_token
+
 import config
+from pocket import (generate_auth_url, get_list, request_auth_access_token,
+                    request_auth_code)
 
 # Configuration logging
 logging.basicConfig(level=logging.INFO)
@@ -252,6 +254,19 @@ async def login_button_handler(query: types.CallbackQuery):
                 "if the problem persists, contact the developer."
             )
         )
+
+
+@dp.callback_query_handler(
+    text=["main_menu"]
+)
+async def main_menu_handler(query: types.CallbackQuery):
+    """
+    Handle 🏠 Main Menu button
+    """
+    await query.message.edit_text(
+        "Main Menu",
+        reply_markup=back_to_main_menu_keyboard()
+    )
 
 
 if __name__ == "__main__":
