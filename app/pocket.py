@@ -15,6 +15,15 @@ def request_auth_code(user_id: int) -> dict:
     Request Pocket authorization code
 
     Source: https://getpocket.com/developer/docs/authentication
+
+    :param user_id: User ID
+    :type user_id: int
+
+    :return: a dict with the following keys:
+        - status: True if the request was successful, False otherwise
+        - status_code: the HTTP status code of the response (if status is False)
+        - message: the error message (if status is False)
+        - code: the authorization code (if status is True)
     """
     url = f"{POCKET_BASE_URL}/v3/oauth/request"
     data = {
@@ -38,6 +47,16 @@ def request_auth_code(user_id: int) -> dict:
 def generate_auth_url(user_id: int, code: str) -> str:
     """
     Generate Pocket authorization URL
+
+    Source: https://getpocket.com/developer/docs/authentication
+
+    :param user_id: User ID
+    :type user_id: int
+
+    :param code: Authorization code
+    :type code: str
+
+    :return: a string with the Pocket authorization URL
     """
     redirect_url = f"{BASE_REDIRECT_URL}{user_id}"
     return f"{POCKET_BASE_URL}/auth/authorize?"\
@@ -49,6 +68,16 @@ def request_auth_access_token(code: str) -> dict:
     Request Pocket authorization access token
 
     Source: https://getpocket.com/developer/docs/authentication
+
+    :param code: Authorization code
+    :type code: str
+
+    :return: a dict with the following keys:
+        - status: True if the request was successful, False otherwise
+        - status_code: the HTTP status code of the response (if status is False)
+        - message: the error message (if status is False)
+        - access_token: the access token (if status is True)
+        - username: the pocket username (if status is True)
     """
     url = f"{POCKET_BASE_URL}/v3/oauth/authorize"
     data = {
