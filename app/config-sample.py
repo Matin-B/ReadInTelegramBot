@@ -1,6 +1,8 @@
 BOT_TOKEN = ""
 BOT_URL = ""
 
+BASE_REDIRECT_URL = f"{BOT_URL}?start=authorizationFinished_"
+
 # Database connection
 MONGO_URI = ""
 MONGO_DB = ""

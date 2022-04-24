@@ -281,8 +281,14 @@ async def my_list_handler(query: types.CallbackQuery):
     auth_access_token = user_auth_data["auth_access_token"]
     user_list_data = get_list(auth_access_token)
     if user_list_data["status"]:
-        items = user_list_data["list"]
+        data = user_list_data["data"]
+        items = data["list"]
         total_items = len(items)
+        await query.message.edit_text(
+            emojize(
+                f":pushpin: Total items: {total_items}"
+            )
+        )
     else:
         await query.message.edit_text(
             emojize(
