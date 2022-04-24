@@ -5,5 +5,5 @@ BOT_URL = ""
 MONGO_URI = ""
 MONGO_DB = ""
 
-POCKET_BASE_URL = ""
+POCKET_BASE_URL = "https://getpocket.com"
 POCKET_CONSUMER_KEY = ""
